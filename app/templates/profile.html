@@ -1,0 +1,45 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block title %}User Profile{% endblock %} 
+
+{% block head %}  <!-- Add this block for meta tags -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg border-0 p-4 text-center">
+    <!-- Profile Picture -->
+    <div class="profile-pic-container mb-3">
+      <img
+        src="{% static 'images/logo.png' %}"
+        class="rounded-circle"
+        width="150"
+        height="150"
+        alt="Profile Photo"
+      />
+    </div>
+
+    <div class="name-row">
+      <h3>
+        <span class="first-name">{{ user.first_name }}</span>
+        <span class="last-name">{{ user.last_name }}</span>
+      </h3>
+    </div>
+    <p class="email">
+      <h3><a>{{ user.email }}</a></h3>
+    </p>
+
+    <!-- Logout Button -->
+    <form method="POST" action="{% url 'app:SignOut' %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger mt-3">
+        <i class="bi bi-box-arrow-left"></i> Logout
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}
